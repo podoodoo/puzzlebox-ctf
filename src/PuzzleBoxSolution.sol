@@ -1,12 +1,9 @@
 pragma solidity ^0.8.19;
 
 import "./PuzzleBox.sol";
-import "forge-std/console.sol";
 
 contract PuzzleBoxSolution {
     function solve(PuzzleBox puzzle) external {
-        // How close can you get to opening the box?
-
         // Drip event
         NotAContract c = new NotAContract(puzzle);
         address(c).call(""); // fallback
@@ -91,8 +88,6 @@ contract NotAContract {
             payable(address(uint160(address(puzzle)) + 2)).transfer(1); // cold
         }
     }
-
-    function destroy() public {}
 
     fallback() external payable {
         if (counter < 10) {
